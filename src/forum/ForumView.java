@@ -113,7 +113,7 @@ public class ForumView {
         if (Forum.getThreads().isEmpty()) {
             System.out.println("There aren't any threads in this section yet");
             return;
-        };
+        }
 
         for (Thread thread : Forum.getThreads()) {
             System.out.println(thread.getID() + " " + thread.getThreadTitle());
@@ -129,16 +129,20 @@ public class ForumView {
     }
 
     public static void createSectionThread(Section section) {
-        System.out.println("Write: ");
+        System.out.println("Write thread title: ");
+        String title = scanner.nextLine();
+
+        System.out.println("Write content: ");
         String content = scanner.nextLine();
 
-        Thread thread = Thread.createThread(content, currentUser, section);
+        Thread thread = Thread.createThread(title, content, currentUser, section);
 
         browseSection(section);
     }
 
     public static void postInThread(Thread thread, Section section) {
-        System.out.println("Write: ");
+
+        System.out.println("Write content: ");
         String content = scanner.nextLine();
 
         thread.createThreadPost(content, currentUser);

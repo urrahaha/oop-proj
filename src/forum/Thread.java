@@ -11,10 +11,11 @@ public class Thread {
     private final Section attachedSection;
     private String threadTitle;
 
-    private Thread(String content, User poster, Section section) {
+    private Thread(String title, String content, User poster, Section section) {
         this.id = Forum.getThreads().size();
         this.originalPoster = poster;
         this.attachedSection = section;
+        this.threadTitle = title;
         Post.createPost(content, poster, this);
         Forum.getThreads().add(this);
     }
@@ -30,10 +31,14 @@ public class Thread {
     public String getThreadTitle() { return threadTitle; }
     public void editThreadTitle(String threadTitle) { this.threadTitle = threadTitle; }
 
-    public static Thread createThread(String content, User poster, Section section) {
-        return new Thread(content, poster, section);
+    public static Thread createThread(String title, String content, User poster, Section section) {
+        return new Thread(title, content, poster, section);
     }
 
+    public Post createThreadPost(String title, String content, User poster) {
+        this.threadTitle = title;
+        return Post.createPost(content, poster, this);
+    }
     public Post createThreadPost(String content, User poster) {
         return Post.createPost(content, poster, this);
     }
